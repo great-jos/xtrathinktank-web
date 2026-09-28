@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XtraThinkTank Solutions — Business Solutions &amp; Support</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/image-slot.js" defer></script>
+<script src="assets/js/style-hooks.js" defer></script>
+<style>
+  body { margin: 0; text-wrap: pretty; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  [data-r]{min-width:0}
+  @media (min-width:901px){
+    [data-vgrid]>*:not(:last-child){border-right:2px solid var(--color-divider);padding-right:clamp(20px,3vw,48px)}
+  }
+  @media (max-width:900px){
+    [data-r="dim"]{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+    [data-r="think"]{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+    [data-vgrid]>*{border-right:0!important;padding-right:0!important}
+    [data-hero-slide]{min-height:min(88vh,760px)!important}
+    [data-xtt-hero] div[aria-hidden]{background:linear-gradient(180deg, rgba(12,11,10,.55) 0%, rgba(12,11,10,.72) 42%, rgba(12,11,10,.92) 100%)!important}
+  }
+  [data-hero-slides]{display:grid}
+  [data-hero-slide]{grid-area:1/1}
+  [data-hero-dot]{width:9px;height:9px;border-radius:50%;border:2px solid rgba(247,246,245,.55);background:transparent;padding:0;cursor:pointer;transition:background .3s ease,border-color .3s ease}
+  [data-hero-dot][aria-current="true"]{background:#f7f6f5;border-color:#f7f6f5}
+  @media (prefers-reduced-motion: reduce){ [data-hero-slide]{transition-duration:.01ms!important} }
+  @media (max-width:1120px){
+    [data-r="5col"],[data-r="4col"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    [data-r="5col"]>*,[data-r="4col"]>*{border-bottom:2px solid var(--color-divider)}
+    [data-r="5col"]>*:nth-child(2n),[data-r="4col"]>*:nth-child(2n){border-right:0!important}
+    [data-r="5col"]>*:last-child:nth-child(odd){grid-column:1/-1;border-right:0!important}
+    [data-r="footer"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  }
+  @media (max-width:900px){
+    [data-r="split"],[data-r="splitrev"],[data-r="svc"],[data-r="form"],[data-r="2col"],
+    [data-r="5col"],[data-r="4col"],[data-r="3col"],[data-r="footer"]{grid-template-columns:minmax(0,1fr)!important}
+    [data-r="splitrev"]>figure{order:-1}
+    [data-r="5col"]>*,[data-r="4col"]>*,[data-r="3col"]>*{border-right:0!important;border-left:0!important;padding-left:0!important;padding-right:0!important;border-bottom:2px solid var(--color-divider)}
+    [data-r="3col"]{border-left:0!important}
+    [data-r="svc"]{gap:8px!important}
+    [data-r="2col"],[data-r="form"]{gap:24px!important}
+  }
+</style>
+</head>
+<body>
+<div style="background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);overflow-x:clip">
+
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:var(--color-accent);color:var(--color-bg);padding:12px 16px;z-index:100" style-focus="left:0">Skip to content</a>
+
+<nav class="nav" style="position:sticky;top:0;z-index:50;background:var(--color-bg);padding-left:clamp(24px,5vw,72px);padding-right:clamp(24px,5vw,72px);gap:32px">
+  <a class="nav-brand" href="index.html" style="margin-right:auto;display:flex;align-items:center;text-decoration:none">
+    <img src="assets/img/brand-logo.png" alt="XtraThinkTank Solutions" style="height:30px;width:auto;display:block">
+  </a>
+  <div style="display:flex;align-items:center;gap:28px" data-xtt-navlinks>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="insights.html">Insights</a>
+    <a href="leadership.html">Leadership</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a data-xtt-navcta class="btn btn-primary" href="contact.html" style="text-decoration:none;color:var(--color-bg)">Let's Talk →</a>
+  <button type="button" data-xtt-menubtn class="btn btn-secondary" aria-expanded="false" aria-controls="xtt-menu" style="padding:10px 16px;font-size:14px">Menu</button>
+</nav>
+<div id="xtt-menu" data-xtt-menu style="display:none;position:sticky;top:0;z-index:49;background:var(--color-bg);border-bottom:2px solid var(--color-divider)">
+  <a href="about.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">About</a>
+  <a href="services.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Services</a>
+  <a href="insights.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Insights</a>
+  <a href="leadership.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Leadership</a>
+  <a href="contact.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Contact</a>
+  <div style="padding:20px clamp(24px,5vw,72px) 24px;border-top:2px solid var(--color-divider)">
+    <a class="btn btn-primary" href="contact.html" style="text-decoration:none;color:var(--color-bg);width:100%;justify-content:flex-start;padding:16px">Let's Talk →</a>
+  </div>
+</div>
+
+<main id="main">
+
+<section data-xtt-hero style="position:relative;overflow:hidden;background:#141312">
+  <div data-hero-slides>
+    <div data-hero-slide style="position:relative;min-height:min(84vh,860px);display:flex;align-items:flex-end;overflow:hidden;opacity:1;transition:opacity 1.1s ease">
+      <image-slot data-hero id="xtt-hero-file" shape="rect" fit="cover" src="assets/img/hero.png" placeholder="Drop hero image — Nigerian entrepreneur or modern Lagos office, documentary style" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+      <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(100deg, rgba(12,11,10,.92) 0%, rgba(12,11,10,.80) 38%, rgba(12,11,10,.42) 66%, rgba(12,11,10,.28) 100%)"></div>
+      <div style="position:relative;width:100%;max-width:1360px;margin:0 auto;padding:clamp(56px,7vw,104px) clamp(24px,5vw,72px) 0">
+        <div data-r="herotext" style="max-width:min(100%,940px)">
+          <span data-xtt-reveal style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#f3f2f2;opacity:.72;margin:0 0 28px">Business Solutions &amp; Support · Lagos, Nigeria</span>
+          <h1 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(40px,6vw,86px);line-height:1.02;letter-spacing:-0.03em;margin:0;margin-left:-0.05em;color:#f7f6f5">
+            <span style="display:block">Build a stronger business.</span>
+            <span style="display:block">Build a business that lasts.</span>
+          </h1>
+          <p data-xtt-reveal style="font-size:clamp(16px,1.4vw,19px);line-height:1.6;max-width:52ch;margin:32px 0 0;color:#f3f2f2;opacity:.86">Practical financial, strategic, compliance and people solutions for ambitious businesses ready to grow.</p>
+          <div data-xtt-reveal style="display:flex;gap:12px;flex-wrap:wrap;margin:36px 0 0">
+            <a class="btn btn-primary" href="contact.html" style="text-decoration:none;color:var(--color-bg);padding:14px 22px;font-size:15px">Let's Build Your Business →</a>
+            <a class="btn" href="#services" style="text-decoration:none;padding:14px 22px;font-size:15px;color:#f7f6f5;border:2px solid rgba(247,246,245,.55);background:transparent" style-hover="border-color:#f7f6f5;background:rgba(247,246,245,.10)">Explore Our Solutions</a>
+          </div>
+        </div>
+        <div data-r="think" style="display:flex;gap:0;margin:clamp(48px,6vw,88px) 0 0;border-top:2px solid rgba(247,246,245,.4)">
+          <span style="flex:1;padding:14px 0;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-family:var(--font-heading);font-weight:800;color:#f7f6f5">Think</span>
+          <span style="flex:1;padding:14px 0;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-family:var(--font-heading);font-weight:800;color:#f7f6f5">Solve</span>
+          <span style="flex:1;padding:14px 0;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-family:var(--font-heading);font-weight:800;color:#f7f6f5">Build</span>
+          <span style="flex:1;padding:14px 0;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;font-family:var(--font-heading);font-weight:800;color:var(--color-accent)">Grow</span>
+        </div>
+      </div>
+    </div>
+    <div data-hero-slide style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:0;transition:opacity 1.1s ease" inert>
+      <image-slot id="xtt-xtraclean-file" shape="rect" fit="cover" src="assets/img/xtraclean.png" placeholder="Drop the XtraClean promotional banner" style="position:absolute;inset:0;width:100%;height:100%"></image-slot>
+    </div>
+  </div>
+  <div data-hero-dots style="position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:10px;z-index:5">
+    <button type="button" data-hero-dot aria-label="Show slide 1" aria-current="true"></button>
+    <button type="button" data-hero-dot aria-label="Show slide 2"></button>
+  </div>
+</section>
+
+<section style="padding:0 clamp(24px,5vw,72px);margin-top:clamp(56px,7vw,104px)">
+  <div style="max-width:1360px;margin:0 auto;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:40px 0">
+    <p data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(20px,2.2vw,30px);line-height:1.25;letter-spacing:-0.015em;margin:0;max-width:34ch">We don't just identify problems — we help businesses find solutions and provide the support to implement them.</p>
+  </div>
+</section>
+
+<section id="about" style="padding:clamp(64px,7vw,120px) clamp(24px,5vw,72px)">
+  <div style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(32px,5vw,88px);align-items:start" data-r="split">
+    <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(32px,4.2vw,60px);line-height:1.06;letter-spacing:-0.024em;margin:0;margin-left:-0.05em">
+      <span style="display:block">Business is complex.</span>
+      <span style="display:block">Your support shouldn't be.</span>
+    </h2>
+    <div data-xtt-reveal>
+      <p style="font-size:17px;line-height:1.65;margin:0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">XtraThinkTank Solutions works alongside businesses to understand their challenges, develop practical solutions and provide the support required to implement them effectively.</p>
+      <p style="font-size:17px;line-height:1.65;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Every business is different, so our work is designed around the size, nature, structure and specific challenges of each organisation — from start-up and growth to restructuring, expansion and long-term sustainability.</p>
+      <a class="btn btn-ghost" href="about.html" style="text-decoration:none;margin-top:24px;padding-left:0">Why XtraThinkTank →</a>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding:0 clamp(24px,5vw,72px) clamp(48px,6vw,96px)">
+  <div style="max-width:1360px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end;padding-bottom:40px" data-r="split">
+      <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(32px,4.2vw,60px);line-height:1.06;letter-spacing:-0.024em;margin:0;margin-left:-0.05em">Four disciplines.<br>One business partner.</h2>
+      <p data-xtt-reveal style="font-size:16px;line-height:1.65;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">One business partner across audit, tax, advisory and people — so the solution doesn't stop at the edge of a service.</p>
+    </div>
+
+    <div data-xtt-service data-r="svc" style="border-top:2px solid var(--color-divider);display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(20px,4vw,64px);padding:36px 20px 36px 0;cursor:pointer;transition:background .35s ease,padding .35s ease" style-hover="background:color-mix(in srgb, var(--color-text) 5%, transparent);padding-left:20px">
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:15px;letter-spacing:0.04em;color:var(--color-accent-700)">01</span>
+      <div data-r="split" style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,64px);align-items:start">
+        <div>
+          <h3 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,2.6vw,36px);line-height:1.1;letter-spacing:-0.02em;margin:0">Audit &amp; Assurance</h3>
+          <p style="font-size:17px;line-height:1.5;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 85%, transparent)">Know the true health of your business.</p>
+        </div>
+        <div data-xtt-panel style="overflow:hidden;max-height:0;opacity:0;transition:max-height .45s ease,opacity .35s ease">
+          <p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">We help businesses understand the strength, reliability and effectiveness of their financial systems and controls while identifying gaps and providing practical recommendations.</p>
+          <a class="btn btn-ghost" href="audit.html" style="padding-left:0;margin-top:14px;text-decoration:none">Explore Audit &amp; Assurance →</a>
+        </div>
+      </div>
+    </div>
+
+    <div data-xtt-service data-r="svc" style="border-top:2px solid var(--color-divider);display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(20px,4vw,64px);padding:36px 20px 36px 0;cursor:pointer;transition:background .35s ease,padding .35s ease" style-hover="background:color-mix(in srgb, var(--color-text) 5%, transparent);padding-left:20px">
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:15px;letter-spacing:0.04em;color:var(--color-accent-700)">02</span>
+      <div data-r="split" style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,64px);align-items:start">
+        <div>
+          <h3 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,2.6vw,36px);line-height:1.1;letter-spacing:-0.02em;margin:0">Taxation &amp; Compliance</h3>
+          <p style="font-size:17px;line-height:1.5;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 85%, transparent)">Stay compliant. Reduce risk. Make smarter decisions.</p>
+        </div>
+        <div data-xtt-panel style="overflow:hidden;max-height:0;opacity:0;transition:max-height .45s ease,opacity .35s ease">
+          <p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">We help businesses understand their tax obligations, manage compliance requirements, identify risks and take advantage of legitimate tax planning opportunities.</p>
+          <a class="btn btn-ghost" href="tax.html" style="padding-left:0;margin-top:14px;text-decoration:none">Explore Tax &amp; Compliance →</a>
+        </div>
+      </div>
+    </div>
+
+    <div data-xtt-service data-r="svc" style="border-top:2px solid var(--color-divider);display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(20px,4vw,64px);padding:36px 20px 36px 0;cursor:pointer;transition:background .35s ease,padding .35s ease" style-hover="background:color-mix(in srgb, var(--color-text) 5%, transparent);padding-left:20px">
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:15px;letter-spacing:0.04em;color:var(--color-accent-700)">03</span>
+      <div data-r="split" style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,64px);align-items:start">
+        <div>
+          <h3 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,2.6vw,36px);line-height:1.1;letter-spacing:-0.02em;margin:0">Business Advisory &amp; Consulting</h3>
+          <p style="font-size:17px;line-height:1.5;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 85%, transparent)">Turn complex business problems into practical solutions.</p>
+        </div>
+        <div data-xtt-panel style="overflow:hidden;max-height:0;opacity:0;transition:max-height .45s ease,opacity .35s ease">
+          <p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">We work with business owners and management teams to improve performance, strengthen operations, manage risks and develop strategies for sustainable growth.</p>
+          <a class="btn btn-ghost" href="advisory.html" style="padding-left:0;margin-top:14px;text-decoration:none">Explore Advisory →</a>
+        </div>
+      </div>
+    </div>
+
+    <div data-xtt-service data-r="svc" style="border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);display:grid;grid-template-columns:120px minmax(0,1fr);gap:clamp(20px,4vw,64px);padding:36px 20px 36px 0;cursor:pointer;transition:background .35s ease,padding .35s ease" style-hover="background:color-mix(in srgb, var(--color-text) 5%, transparent);padding-left:20px">
+      <span style="font-family:var(--font-heading);font-weight:800;font-size:15px;letter-spacing:0.04em;color:var(--color-accent-700)">04</span>
+      <div data-r="split" style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,64px);align-items:start">
+        <div>
+          <h3 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,2.6vw,36px);line-height:1.1;letter-spacing:-0.02em;margin:0">People &amp; Human Capital</h3>
+          <p style="font-size:17px;line-height:1.5;margin:12px 0 0;color:color-mix(in srgb, var(--color-text) 85%, transparent)">Build the people your business needs to grow.</p>
+        </div>
+        <div data-xtt-panel style="overflow:hidden;max-height:0;opacity:0;transition:max-height .45s ease,opacity .35s ease">
+          <p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">We help organisations attract, develop and retain the right talent while creating systems that improve employee performance and organisational effectiveness.</p>
+          <a class="btn btn-ghost" href="people.html" style="padding-left:0;margin-top:14px;text-decoration:none">Explore Human Capital →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,104px) clamp(24px,5vw,72px)">
+  <div style="max-width:1360px;margin:0 auto">
+    <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,3.8vw,54px);line-height:1.06;letter-spacing:-0.024em;margin:0 0 48px;margin-left:-0.05em;max-width:22ch">Wherever your business is going, we're here to help you build it.</h2>
+    <div data-r="5col" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:2px solid var(--color-divider)">
+      <div data-xtt-reveal style="padding:28px 20px 32px 0;border-right:2px solid var(--color-divider)"><span style="display:block;width:10px;height:10px;background:var(--color-accent);margin-bottom:20px"></span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Start</h3><p style="font-size:14.5px;line-height:1.55;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Building the foundation</p></div>
+      <div data-xtt-reveal style="padding:28px 20px 32px;border-right:2px solid var(--color-divider)"><span style="display:block;width:10px;height:10px;background:var(--color-accent);margin-bottom:20px"></span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Grow</h3><p style="font-size:14.5px;line-height:1.55;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Improving performance</p></div>
+      <div data-xtt-reveal style="padding:28px 20px 32px;border-right:2px solid var(--color-divider)"><span style="display:block;width:10px;height:10px;background:var(--color-accent);margin-bottom:20px"></span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Scale</h3><p style="font-size:14.5px;line-height:1.55;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Expanding the business</p></div>
+      <div data-xtt-reveal style="padding:28px 20px 32px;border-right:2px solid var(--color-divider)"><span style="display:block;width:10px;height:10px;background:var(--color-accent);margin-bottom:20px"></span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Transform</h3><p style="font-size:14.5px;line-height:1.55;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Strengthening systems and capabilities</p></div>
+      <div data-xtt-reveal style="padding:28px 0 32px 20px"><span style="display:block;width:10px;height:10px;background:var(--color-accent);margin-bottom:20px"></span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 10px">Sustain</h3><p style="font-size:14.5px;line-height:1.55;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Building for the long term</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="difference" style="background:var(--color-accent);color:var(--color-bg)">
+  <div style="max-width:1360px;margin:0 auto;padding:clamp(64px,7vw,120px) clamp(24px,5vw,72px)">
+    <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(34px,4.6vw,66px);line-height:1.05;letter-spacing:-0.024em;margin:0;margin-left:-0.05em;max-width:20ch"><span style="display:block">Advice is easy.</span><span style="display:block">Implementation is where value is created.</span></h2>
+    <p style="font-size:19px;line-height:1.55;max-width:56ch;margin:36px 0 0">We don't just identify problems. We work with our clients to understand the problem, develop the solution and support its implementation.</p>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,104px) clamp(24px,5vw,72px)">
+  <div data-r="4col" style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider)">
+    <div data-xtt-reveal style="padding:32px 24px 36px 0;border-right:2px solid var(--color-divider)"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.01em;margin:0 0 12px">Practical</h3><p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Solutions designed around real business challenges.</p></div>
+    <div data-xtt-reveal style="padding:32px 24px 36px;border-right:2px solid var(--color-divider)"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.01em;margin:0 0 12px">Tailored</h3><p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">No one-size-fits-all approach.</p></div>
+    <div data-xtt-reveal style="padding:32px 24px 36px;border-right:2px solid var(--color-divider)"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.01em;margin:0 0 12px">Partnership</h3><p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">We work alongside our clients rather than simply handing over a report.</p></div>
+    <div data-xtt-reveal style="padding:32px 0 36px 24px"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.01em;margin:0 0 12px">Sustainable</h3><p style="font-size:15.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">We help businesses build structures, systems and processes that support long-term growth.</p></div>
+  </div>
+</section>
+
+<section id="health" style="padding:0 clamp(24px,5vw,72px) clamp(64px,7vw,120px)">
+  <div style="max-width:1360px;margin:0 auto">
+    <span data-xtt-reveal style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 24px">The business health check</span>
+    <div style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,72px);align-items:end;margin-bottom:56px" data-r="split">
+      <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(32px,4.2vw,60px);line-height:1.06;letter-spacing:-0.024em;margin:0;margin-left:-0.05em">Think of us as your business health checker.</h2>
+      <p data-xtt-reveal style="font-size:16px;line-height:1.65;margin:0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">A healthy business isn't only about making money. It is about having the systems, controls, people and strategy required to keep growing.</p>
+    </div>
+    <div data-xtt-dash style="border-top:2px solid var(--color-divider)">
+      <div data-xtt-dim data-vgrid data-r="dim" style="display:grid;grid-template-columns:64px 260px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:center;padding:24px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:0.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent)">01</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;margin:0">Financial Health</h3><div style="display:flex;align-items:center;gap:20px"><p style="font-size:15px;line-height:1.55;margin:0;flex:1;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Reporting, cash flow, margins and the numbers behind decisions.</p><span style="display:block;width:120px;height:4px;background:color-mix(in srgb, var(--color-text) 12%, transparent);flex:none"><span data-xtt-bar style="display:block;height:100%;width:0;background:var(--color-accent);transition:width .8s cubic-bezier(.2,.7,.3,1)"></span></span></div></div>
+      <div data-xtt-dim data-vgrid data-r="dim" style="display:grid;grid-template-columns:64px 260px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:center;padding:24px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:0.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent)">02</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;margin:0">Compliance</h3><div style="display:flex;align-items:center;gap:20px"><p style="font-size:15px;line-height:1.55;margin:0;flex:1;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Tax obligations, filings, records and corporate governance.</p><span style="display:block;width:120px;height:4px;background:color-mix(in srgb, var(--color-text) 12%, transparent);flex:none"><span data-xtt-bar style="display:block;height:100%;width:0;background:var(--color-accent);transition:width .8s cubic-bezier(.2,.7,.3,1)"></span></span></div></div>
+      <div data-xtt-dim data-vgrid data-r="dim" style="display:grid;grid-template-columns:64px 260px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:center;padding:24px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:0.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent)">03</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;margin:0">Operations</h3><div style="display:flex;align-items:center;gap:20px"><p style="font-size:15px;line-height:1.55;margin:0;flex:1;color:color-mix(in srgb, var(--color-text) 75%, transparent)">How the work actually gets done, and what it costs to do it.</p><span style="display:block;width:120px;height:4px;background:color-mix(in srgb, var(--color-text) 12%, transparent);flex:none"><span data-xtt-bar style="display:block;height:100%;width:0;background:var(--color-accent);transition:width .8s cubic-bezier(.2,.7,.3,1)"></span></span></div></div>
+      <div data-xtt-dim data-vgrid data-r="dim" style="display:grid;grid-template-columns:64px 260px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:center;padding:24px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:0.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent)">04</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;margin:0">People</h3><div style="display:flex;align-items:center;gap:20px"><p style="font-size:15px;line-height:1.55;margin:0;flex:1;color:color-mix(in srgb, var(--color-text) 75%, transparent)">The right people, in the right roles, with the right skills.</p><span style="display:block;width:120px;height:4px;background:color-mix(in srgb, var(--color-text) 12%, transparent);flex:none"><span data-xtt-bar style="display:block;height:100%;width:0;background:var(--color-accent);transition:width .8s cubic-bezier(.2,.7,.3,1)"></span></span></div></div>
+      <div data-xtt-dim data-vgrid data-r="dim" style="display:grid;grid-template-columns:64px 260px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:center;padding:24px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:0.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent)">05</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;margin:0">Strategy</h3><div style="display:flex;align-items:center;gap:20px"><p style="font-size:15px;line-height:1.55;margin:0;flex:1;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Where the business is going, and the plan for getting there.</p><span style="display:block;width:120px;height:4px;background:color-mix(in srgb, var(--color-text) 12%, transparent);flex:none"><span data-xtt-bar style="display:block;height:100%;width:0;background:var(--color-accent);transition:width .8s cubic-bezier(.2,.7,.3,1)"></span></span></div></div>
+      <div data-xtt-dim data-vgrid data-r="dim" style="display:grid;grid-template-columns:64px 260px minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:center;padding:24px 0;border-bottom:2px solid var(--color-divider)"><span style="font-size:12px;letter-spacing:0.08em;color:color-mix(in srgb, var(--color-text) 55%, transparent)">06</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:18px;letter-spacing:0.04em;text-transform:uppercase;margin:0">Growth</h3><div style="display:flex;align-items:center;gap:20px"><p style="font-size:15px;line-height:1.55;margin:0;flex:1;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Expansion, new markets and building for the long term.</p><span style="display:block;width:120px;height:4px;background:color-mix(in srgb, var(--color-text) 12%, transparent);flex:none"><span data-xtt-bar style="display:block;height:100%;width:0;background:var(--color-accent);transition:width .8s cubic-bezier(.2,.7,.3,1)"></span></span></div></div>
+      <p style="font-size:14px;line-height:1.6;margin:24px 0 0;max-width:60ch;color:color-mix(in srgb, var(--color-text) 60%, transparent)">These are the dimensions we look at when we work with a business. Not a score — a framework.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,72px);align-items:end;padding-top:48px" data-r="split">
+      <h3 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3.2vw,44px);line-height:1.08;letter-spacing:-0.02em;margin:0;margin-left:-0.05em">Strong businesses are built, not improvised.</h3>
+      <div data-xtt-reveal><a class="btn btn-primary" href="contact.html" style="text-decoration:none;padding:14px 22px;font-size:15px">See how we can help →</a></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,104px) clamp(24px,5vw,72px);border-top:2px solid var(--color-divider)">
+  <div style="max-width:1360px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:48px" data-r="split">
+      <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,3.8vw,54px);line-height:1.06;letter-spacing:-0.024em;margin:0;margin-left:-0.05em">What we actually do for businesses.</h2>
+      <p data-xtt-reveal style="font-size:16px;line-height:1.65;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">The full capability map across the practice. Hover any line to bring it forward.</p>
+    </div>
+    <div data-r="5col" style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--color-divider)">
+      <div style="border-right:2px solid var(--color-divider);padding:24px 24px 32px 0"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 20px">Strategy &amp; Growth</h3><div style="display:flex;flex-direction:column;gap:2px"><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Business planning</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Growth strategy</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Market expansion</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Business restructuring</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Performance optimisation</span></div></div>
+      <div style="border-right:2px solid var(--color-divider);padding:24px 24px 32px"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 20px">Finance</h3><div style="display:flex;flex-direction:column;gap:2px"><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Financial analysis</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Budgeting</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Forecasting</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Cash-flow management</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Financial modelling</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Business valuation</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Investment appraisal</span></div></div>
+      <div style="border-right:2px solid var(--color-divider);padding:24px 24px 32px"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 20px">Risk &amp; Controls</h3><div style="display:flex;flex-direction:column;gap:2px"><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Risk management</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Internal controls</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Fraud risk</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Process reviews</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Compliance risk</span></div></div>
+      <div style="border-right:2px solid var(--color-divider);padding:24px 24px 32px"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 20px">Technology &amp; Data</h3><div style="display:flex;flex-direction:column;gap:2px"><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Business dashboards</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Data analytics</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Business intelligence</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Process automation</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Digital reporting</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Business management systems</span></div></div>
+      <div style="padding:24px 0 32px 24px"><h3 style="font-family:var(--font-heading);font-weight:800;font-size:17px;letter-spacing:0.04em;text-transform:uppercase;margin:0 0 20px">People</h3><div style="display:flex;flex-direction:column;gap:2px"><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Recruitment</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Human capital planning</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Performance management</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Training</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">HR policies</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Payroll &amp; HR technology</span><span data-xtt-cap style="font-size:14.5px;line-height:1.4;padding:6px 8px 6px 0;transition:color .2s ease,padding-left .2s ease" style-hover="color:var(--color-accent-700);padding-left:8px">Leadership development</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,96px) clamp(24px,5vw,72px);border-top:2px solid var(--color-divider)">
+  <div style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px" data-r="4col">
+    <div data-xtt-reveal><p style="font-family:var(--font-heading);font-weight:800;font-size:clamp(40px,4.4vw,64px);line-height:1;letter-spacing:-0.03em;color:var(--color-accent);margin:0 0 14px">15+</p><p style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin:0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Years of professional experience</p></div>
+    <div data-xtt-reveal><p style="font-family:var(--font-heading);font-weight:800;font-size:clamp(40px,4.4vw,64px);line-height:1;letter-spacing:-0.03em;color:var(--color-accent);margin:0 0 14px">4</p><p style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin:0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Core business solution areas</p></div>
+    <div data-xtt-reveal><p style="font-family:var(--font-heading);font-weight:800;font-size:clamp(40px,4.4vw,64px);line-height:1;letter-spacing:-0.03em;color:var(--color-accent);margin:0 0 14px">SME</p><p style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin:0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Our primary focus</p></div>
+    <div data-xtt-reveal><p style="font-family:var(--font-heading);font-weight:800;font-size:clamp(40px,4.4vw,64px);line-height:1;letter-spacing:-0.03em;color:var(--color-accent);margin:0 0 14px">Nigeria</p><p style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin:0;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Our home market</p></div>
+  </div>
+</section>
+
+<section id="insights" style="padding:clamp(56px,6vw,104px) clamp(24px,5vw,72px);border-top:2px solid var(--color-divider)">
+  <div style="max-width:1360px;margin:0 auto">
+    <span data-xtt-reveal style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 24px">Insights</span>
+    <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,3.8vw,54px);line-height:1.06;letter-spacing:-0.024em;margin:0 0 48px;margin-left:-0.05em;max-width:24ch">Ideas for people building businesses that matter.</h2>
+    <div style="display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(24px,4vw,64px);border-top:2px solid var(--color-divider);padding-top:32px;align-items:center" data-r="split">
+      <figure style="margin:0;filter:saturate(0.88)"><image-slot id="xtt-featured-v4" shape="rect" fit="contain" src="assets/img/sme-guide-cutout.png" placeholder="Drop the book cover — The Complete SME Guide" style="width:100%;aspect-ratio:2/3"></image-slot></figure>
+      <div>
+        <span class="tag tag-outline" style="margin-bottom:20px">Publication</span>
+        <h3 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(26px,3vw,42px);line-height:1.08;letter-spacing:-0.02em;margin:16px 0 0">The Complete SME Guide</h3>
+        <p style="font-size:16.5px;line-height:1.6;margin:20px 0 0;color:color-mix(in srgb, var(--color-text) 78%, transparent)">Written by Oke Oladimeji as a practical reference for entrepreneurs and business owners building stronger, more sustainable businesses.</p>
+        <a class="btn btn-ghost" href="insights.html" style="text-decoration:none;padding-left:0;margin-top:24px">Read the Insight →</a>
+      </div>
+    </div>
+    <div data-r="4col" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--color-divider);margin-top:56px">
+      <div style="border-right:2px solid var(--color-divider);padding:28px 24px 32px 0"><span style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:16px">Monthly · Instagram Live</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:21px;letter-spacing:-0.01em;margin:0 0 12px">SME Hangout</h3><p style="font-size:14.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">A monthly platform for sharing practical knowledge with entrepreneurs and business owners.</p></div>
+      <div style="border-right:2px solid var(--color-divider);padding:28px 24px 32px"><span style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin-bottom:16px">Annual event</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:21px;letter-spacing:-0.01em;margin:0 0 12px">Business Financial Conference</h3><p style="font-size:14.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Convened by Oke Oladimeji as a flagship annual gathering for business owners and managers.</p></div>
+      <div style="border-right:2px solid var(--color-divider);padding:28px 24px 32px;background:color-mix(in srgb, var(--color-text) 3%, transparent)"><span style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin-bottom:16px">Slot available</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:21px;letter-spacing:-0.01em;margin:0 0 12px;color:color-mix(in srgb, var(--color-text) 40%, transparent)">Next article</h3><p style="font-size:14.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 45%, transparent)">Reserved for the next piece from the knowledge platform.</p></div>
+      <div style="padding:28px 0 32px 24px;background:color-mix(in srgb, var(--color-text) 3%, transparent)"><span style="display:block;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:color-mix(in srgb, var(--color-text) 50%, transparent);margin-bottom:16px">Slot available</span><h3 style="font-family:var(--font-heading);font-weight:800;font-size:21px;letter-spacing:-0.01em;margin:0 0 12px;color:color-mix(in srgb, var(--color-text) 40%, transparent)">Next report</h3><p style="font-size:14.5px;line-height:1.6;margin:0;color:color-mix(in srgb, var(--color-text) 45%, transparent)">Reserved for research and reports as they are published.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="leadership" style="padding:clamp(56px,6vw,104px) clamp(24px,5vw,72px);border-top:2px solid var(--color-divider)">
+  <div style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,88px);align-items:center" data-r="splitrev">
+    <figure class="grayscale" style="margin:0"><image-slot id="xtt-leader-file" shape="rect" fit="cover" src="assets/img/oke-portrait.png" placeholder="Drop portrait — Oke Oladimeji" style="width:100%;aspect-ratio:4/5"></image-slot></figure>
+    <div>
+      <span data-xtt-reveal style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 24px">Leadership</span>
+      <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(30px,3.6vw,52px);line-height:1.06;letter-spacing:-0.024em;margin:0;margin-left:-0.05em">Meet the thinking behind XtraThinkTank.</h2>
+      <p data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:22px;letter-spacing:-0.01em;margin:36px 0 4px">Oke Oladimeji</p>
+      <p data-xtt-reveal style="font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 20px;color:color-mix(in srgb, var(--color-text) 70%, transparent)">Managing Executive</p>
+      <p data-xtt-reveal style="font-size:16.5px;line-height:1.65;max-width:52ch;margin:0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">A Chartered Accountant and Chartered Tax Practitioner with over 15 years across accounting, taxation, financial management, business development and management consulting. He holds a Master's Degree in Financial Management, and is an author, entrepreneur and advocate for SME development.</p>
+      <a data-xtt-reveal class="btn btn-ghost" href="leadership.html" style="text-decoration:none;padding-left:0;margin-top:24px">Meet Oke →</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="padding:clamp(64px,7vw,120px) clamp(24px,5vw,72px);border-top:2px solid var(--color-divider)">
+  <div style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(32px,5vw,88px)" data-r="split">
+    <div>
+      <h2 data-xtt-reveal style="font-family:var(--font-heading);font-weight:800;font-size:clamp(34px,4.4vw,64px);line-height:1.05;letter-spacing:-0.026em;margin:0;margin-left:-0.05em">Let's talk about your business.</h2>
+      <p data-xtt-reveal style="font-size:17px;line-height:1.65;max-width:48ch;margin:28px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Tell us where the business is and what is getting in the way. We'll tell you what we'd do about it.</p>
+      <div data-r="2col" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:48px;border-top:2px solid var(--color-divider);padding-top:32px">
+        <div><h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 12px;color:var(--color-accent-700)">Corporate Office</h3><p style="font-size:15.5px;line-height:1.6;margin:0">Suite 14-16, Road 5 Ikota Shopping Complex, VGC, Ajah, Lagos.</p></div>
+        <div><h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 12px;color:var(--color-accent-700)">Branch Office</h3><p style="font-size:15.5px;line-height:1.6;margin:0">5, Oladunni Street, Meiran Ojokoro, Alimosho, Lagos.</p></div>
+        <div><h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 12px;color:var(--color-accent-700)">Phone — Call / WhatsApp</h3><p style="font-size:15.5px;line-height:1.6;margin:0"><a href="tel:+2348145803637" style="color:inherit;text-decoration:none">+234 814 580 3637</a></p></div>
+        <div><h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 12px;color:var(--color-accent-700)">Email</h3><p style="font-size:15.5px;line-height:1.6;margin:0;word-break:break-word"><a href="mailto:xtrathinktanksolutionsltd@gmail.com" style="color:inherit;text-decoration:none">xtrathinktanksolutionsltd@gmail.com</a><br><a href="mailto:xtrathinktanksolution@gmail.com" style="color:inherit;text-decoration:none">xtrathinktanksolution@gmail.com</a></p></div>
+      </div>
+    </div>
+    <form data-xtt-form data-r="form" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-content:start">
+      <div class="field"><label for="xtt-name">Name</label><input class="input" id="xtt-name" name="name" type="text" style="min-height:44px"></div>
+      <div class="field"><label for="xtt-company">Company</label><input class="input" id="xtt-company" name="company" type="text" style="min-height:44px"></div>
+      <div class="field"><label for="xtt-email">Email</label><input class="input" id="xtt-email" name="email" type="email" style="min-height:44px"></div>
+      <div class="field"><label for="xtt-phone">Phone</label><input class="input" id="xtt-phone" name="phone" type="tel" style="min-height:44px"></div>
+      <div class="field" style="grid-column:1/-1"><label for="xtt-topic">What can we help you with?</label><select class="input" id="xtt-topic" name="topic" style="min-height:44px"><option>Audit &amp; Assurance</option><option>Taxation &amp; Compliance</option><option>Business Advisory &amp; Consulting</option><option>People &amp; Human Capital</option><option>Something else</option></select></div>
+      <div class="field" style="grid-column:1/-1"><label for="xtt-msg">Tell us about your business</label><textarea class="input" id="xtt-msg" name="message" rows="5" style="min-height:120px"></textarea></div>
+      <div style="grid-column:1/-1"><button type="submit" class="btn btn-primary" style="padding:14px 22px;font-size:15px">Start the Conversation →</button></div>
+      <p data-xtt-formnote style="grid-column:1/-1;margin:0;font-size:13px;color:var(--color-accent-700);display:none" role="status">Thanks — we'll be in touch. Call or WhatsApp +234 814 580 3637 in the meantime.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer style="border-top:2px solid var(--color-divider);padding:clamp(48px,5vw,80px) clamp(24px,5vw,72px) 32px">
+  <div style="max-width:1360px;margin:0 auto">
+    <div data-r="footer" style="display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2fr));gap:clamp(24px,4vw,64px)">
+      <div>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:-0.02em;display:flex;align-items:center;gap:12px;margin-bottom:16px"><img src="assets/img/brand-icon.png" alt="" style="width:26px;height:26px;display:block">XtraThinkTank Solutions</span>
+        <p style="font-size:15.5px;line-height:1.6;margin:0;max-width:34ch;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Practical business solutions for sustainable growth.</p>
+      </div>
+      <div>
+        <h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 16px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Explore</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <a href="services.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Services</a>
+          <a href="about.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">About</a>
+          <a href="leadership.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Leadership</a>
+          <a href="insights.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Insights</a>
+          <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 16px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Services</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <a href="audit.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Audit &amp; Assurance</a>
+          <a href="tax.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Tax &amp; Compliance</a>
+          <a href="advisory.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Business Advisory</a>
+          <a href="people.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">People &amp; Human Capital</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 16px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Connect</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <a href="tel:+2348145803637" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">+234 814 580 3637</a>
+          <a href="https://wa.me/2348145803637" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">WhatsApp</a>
+          <a href="mailto:xtrathinktanksolutionsltd@gmail.com" style="color:inherit;text-decoration:none;word-break:break-word" style-hover="color:var(--color-accent-700)">Email us</a>
+          <span style="color:color-mix(in srgb, var(--color-text) 50%, transparent)">Social — coming soon</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:2px solid var(--color-divider);margin-top:48px;padding-top:24px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">
+      <span>© 2026 XtraThinkTank Solutions Ltd. Registered with the Corporate Affairs Commission, Nigeria.</span>
+      <span style="display:flex;gap:24px;flex-wrap:wrap">
+        <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Privacy Policy</a>
+        <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Terms</a>
+        <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Cookie Policy</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<a data-xtt-stickycta href="contact.html" class="btn btn-primary" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:60;padding:16px;font-size:16px;justify-content:flex-start;text-decoration:none;box-shadow:var(--shadow-lg)">Talk to Us →</a>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch = matchMedia('(hover: none)').matches;
+  var narrow = function () { return window.innerWidth < 900; };
+
+  var reveal = document.querySelectorAll('[data-xtt-reveal]');
+  if (motion) {
+    var below = [];
+    reveal.forEach(function (el) {
+      el.style.transition = 'opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1)';
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(18px)';
+      below.push(el);
+    });
+    var ioFired = false;
+    var io = new IntersectionObserver(function (entries) {
+      ioFired = true;
+      entries.forEach(function (e, i) {
+        if (!e.isIntersecting) return;
+        e.target.style.transitionDelay = Math.min(i * 60, 240) + 'ms';
+        e.target.style.opacity = '1'; e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    below.forEach(function (el) { io.observe(el); });
+    setTimeout(function () {
+      if (ioFired) return;
+      below.forEach(function (el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+    }, 700);
+  }
+
+  var heroSlides = Array.from(document.querySelectorAll('[data-hero-slide]'));
+  var heroDots = Array.from(document.querySelectorAll('[data-hero-dot]'));
+  if (heroSlides.length > 1) {
+    var activeHero = 0;
+    var heroTimer = null;
+    var showHero = function (i) {
+      heroSlides.forEach(function (s, idx) {
+        var on = idx === i;
+        s.style.opacity = on ? '1' : '0';
+        s.style.pointerEvents = on ? 'auto' : 'none';
+        if (on) { s.removeAttribute('inert'); } else { s.setAttribute('inert', ''); }
+      });
+      heroDots.forEach(function (d, idx) { d.setAttribute('aria-current', idx === i ? 'true' : 'false'); });
+      activeHero = i;
+    };
+    var stopHero = function () { if (heroTimer) { clearInterval(heroTimer); heroTimer = null; } };
+    var startHero = function () {
+      stopHero();
+      if (!motion) return;
+      heroTimer = setInterval(function () { showHero((activeHero + 1) % heroSlides.length); }, 7000);
+    };
+    heroDots.forEach(function (d, idx) {
+      d.addEventListener('click', function () { showHero(idx); startHero(); });
+    });
+    var heroSection = document.querySelector('[data-xtt-hero]');
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', stopHero);
+      heroSection.addEventListener('mouseleave', startHero);
+      heroSection.addEventListener('focusin', stopHero);
+      heroSection.addEventListener('focusout', function () { if (!heroSection.contains(document.activeElement)) startHero(); });
+    }
+    showHero(0);
+    startHero();
+  }
+
+  var dash = document.querySelector('[data-xtt-dash]');
+  if (dash) {
+    var draw = function () {
+      dash.querySelectorAll('[data-xtt-bar]').forEach(function (bar, i) {
+        setTimeout(function () { bar.style.width = '100%'; }, motion ? i * 130 : 0);
+      });
+    };
+    var dio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { draw(); dio.disconnect(); } });
+    }, { threshold: 0.25 });
+    dio.observe(dash);
+  }
+
+  var _always = false;
+  var openRow = function (row, on) {
+    var p = row.querySelector('[data-xtt-panel]');
+    if (!p) return;
+    p.style.maxHeight = on ? p.scrollHeight + 40 + 'px' : '0px';
+    p.style.opacity = on ? '1' : '0';
+  };
+  var rows = Array.from(document.querySelectorAll('[data-xtt-service]'));
+  var sync = function () {
+    var always = touch || narrow();
+    rows.forEach(function (r) { openRow(r, always); });
+    _always = always;
+  };
+  rows.forEach(function (r) {
+    r.addEventListener('mouseenter', function () { if (!_always) openRow(r, true); });
+    r.addEventListener('mouseleave', function () { if (!_always) openRow(r, false); });
+    r.addEventListener('focusin', function () { openRow(r, true); });
+    r.setAttribute('tabindex', '0');
+  });
+  sync();
+
+  var cta = document.querySelector('[data-xtt-stickycta]');
+  var navlinks = document.querySelector('[data-xtt-navlinks]');
+  var navcta = document.querySelector('[data-xtt-navcta]');
+  var menuBtn = document.querySelector('[data-xtt-menubtn]');
+  var menu = document.querySelector('[data-xtt-menu]');
+  var setMenu = function (open) {
+    if (!menu || !menuBtn) return;
+    menu.style.display = open ? 'block' : 'none';
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.textContent = open ? 'Close' : 'Menu';
+  };
+  if (menuBtn) menuBtn.addEventListener('click', function () { setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'); });
+  if (menu) menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  var applyResponsive = function () {
+    var n = narrow();
+    if (cta) cta.style.display = n ? 'inline-flex' : 'none';
+    if (navlinks) navlinks.style.display = n ? 'none' : 'flex';
+    if (navcta) navcta.style.display = n ? 'none' : 'inline-flex';
+    if (menuBtn) menuBtn.style.display = n ? 'inline-flex' : 'none';
+    if (!n) setMenu(false);
+    sync();
+  };
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+
+  var form = document.querySelector('[data-xtt-form]');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var note = form.querySelector('[data-xtt-formnote]');
+    if (note) note.style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>
