@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Health Check | XtraThinkTank Solutions Limited</title>
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/image-slot.js" defer></script>
+<script src="assets/js/style-hooks.js" defer></script>
+<style>
+  body { margin: 0; text-wrap: pretty; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  [data-r]{min-width:0}
+  @media (min-width:901px){
+    [data-vgrid]>*:not(:last-child){border-right:2px solid var(--color-divider);padding-right:clamp(20px,3vw,48px)}
+  }
+  @media (max-width:900px){
+    [data-r="dim"]{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+    [data-r="think"]{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}
+    [data-vgrid]>*{border-right:0!important;padding-right:0!important}
+    [data-hero-slide]{min-height:min(88vh,760px)!important}
+    [data-xtt-hero] div[aria-hidden]{background:linear-gradient(180deg, rgba(12,11,10,.55) 0%, rgba(12,11,10,.72) 42%, rgba(12,11,10,.92) 100%)!important}
+  }
+  [data-hero-slides]{display:grid}
+  [data-hero-slide]{grid-area:1/1}
+  [data-hero-dot]{width:9px;height:9px;border-radius:50%;border:2px solid rgba(247,246,245,.55);background:transparent;padding:0;cursor:pointer;transition:background .3s ease,border-color .3s ease}
+  [data-hero-dot][aria-current="true"]{background:#f7f6f5;border-color:#f7f6f5}
+  @media (prefers-reduced-motion: reduce){ [data-hero-slide]{transition-duration:.01ms!important} }
+  @media (max-width:1120px){
+    [data-r="5col"],[data-r="4col"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+    [data-r="5col"]>*,[data-r="4col"]>*{border-bottom:2px solid var(--color-divider)}
+    [data-r="5col"]>*:nth-child(2n),[data-r="4col"]>*:nth-child(2n){border-right:0!important}
+    [data-r="5col"]>*:last-child:nth-child(odd){grid-column:1/-1;border-right:0!important}
+    [data-r="footer"]{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  }
+  @media (max-width:900px){
+    [data-r="split"],[data-r="splitrev"],[data-r="svc"],[data-r="form"],[data-r="2col"],
+    [data-r="5col"],[data-r="4col"],[data-r="3col"],[data-r="footer"]{grid-template-columns:minmax(0,1fr)!important}
+    [data-r="splitrev"]>figure{order:-1}
+    [data-r="5col"]>*,[data-r="4col"]>*,[data-r="3col"]>*{border-right:0!important;border-left:0!important;padding-left:0!important;padding-right:0!important;border-bottom:2px solid var(--color-divider)}
+    [data-r="3col"]{border-left:0!important}
+    [data-r="svc"]{gap:8px!important}
+    [data-r="2col"],[data-r="form"]{gap:24px!important}
+  }
+</style>
+
+<style>
+  .hc-wrap{max-width:880px;margin:0 auto}
+  .hc-section{padding:40px 0 16px;border-top:2px solid var(--color-divider)}
+  .hc-section h2{font-family:var(--font-heading);font-weight:800;font-size:clamp(22px,2.4vw,30px);letter-spacing:-0.01em;margin:0 0 6px}
+  .hc-section p.hc-note{font-size:14px;margin:0 0 20px;color:color-mix(in srgb,var(--color-text) 70%,transparent)}
+  .hc-q{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:center;padding:14px 0;border-bottom:1px solid var(--color-divider)}
+  .hc-q.hc-missing{background:color-mix(in srgb,var(--color-accent) 8%,transparent)}
+  .hc-q-text{font-size:15.5px;line-height:1.5}
+  .hc-opts{display:flex;gap:8px;flex-wrap:wrap}
+  .hc-opt{position:relative}
+  .hc-opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+  .hc-opt label{display:inline-block;padding:8px 14px;border:2px solid var(--color-divider);font-size:14px;cursor:pointer;min-width:84px;text-align:center}
+  .hc-opt input:checked+label{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-bg)}
+  .hc-opt input:focus-visible+label{outline:2px solid var(--color-accent);outline-offset:2px}
+  .hc-field{display:flex;flex-direction:column;gap:6px;margin:0 0 18px}
+  .hc-field>label,.hc-field>.hc-legend{font-size:14px;font-weight:600}
+  .hc-field .hc-opts{margin-top:4px}
+  .hc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
+  .hc-err{color:var(--color-accent-700);font-size:14px;margin:0 0 16px;display:none}
+  .hc-result-band{display:flex;align-items:center;gap:14px;font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,3vw,36px);letter-spacing:-0.01em}
+  .hc-dot{width:18px;height:18px;border-radius:50%;flex:none}
+  .hc-bar{height:6px;background:color-mix(in srgb,var(--color-text) 12%,transparent);margin-top:8px}
+  .hc-bar>span{display:block;height:100%;background:var(--color-accent)}
+  .hc-area{padding:14px 0;border-bottom:1px solid var(--color-divider)}
+  @media (max-width:640px){
+    .hc-q{grid-template-columns:minmax(0,1fr)}
+    .hc-grid{grid-template-columns:minmax(0,1fr)}
+  }
+</style>
+</head>
+<body>
+<div style="background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);overflow-x:clip">
+
+<a href="#main" style="position:absolute;left:-9999px;top:0;background:var(--color-accent);color:var(--color-bg);padding:12px 16px;z-index:100" style-focus="left:0">Skip to content</a>
+
+<nav class="nav" style="position:sticky;top:0;z-index:50;background:var(--color-bg);padding-left:clamp(24px,5vw,72px);padding-right:clamp(24px,5vw,72px);gap:32px">
+  <a class="nav-brand" href="index.html" style="margin-right:auto;display:flex;align-items:center;text-decoration:none">
+    <img src="assets/img/brand-logo.png" alt="XtraThinkTank Solutions Limited" style="height:30px;width:auto;display:block">
+  </a>
+  <div style="display:flex;align-items:center;gap:28px" data-xtt-navlinks>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="insights.html">Insights</a>
+    <a href="leadership.html">Leadership</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a data-xtt-navcta class="btn btn-primary" href="contact.html" style="text-decoration:none;color:var(--color-bg)">Let's Talk →</a>
+  <button type="button" data-xtt-menubtn class="btn btn-secondary" aria-expanded="false" aria-controls="xtt-menu" style="padding:10px 16px;font-size:14px">Menu</button>
+</nav>
+<div id="xtt-menu" data-xtt-menu style="display:none;position:sticky;top:0;z-index:49;background:var(--color-bg);border-bottom:2px solid var(--color-divider)">
+  <a href="about.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">About</a>
+  <a href="services.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Services</a>
+  <a href="insights.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Insights</a>
+  <a href="leadership.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Leadership</a>
+  <a href="contact.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Contact</a>
+  <div style="padding:20px clamp(24px,5vw,72px) 24px;border-top:2px solid var(--color-divider)">
+    <a class="btn btn-primary" href="contact.html" style="text-decoration:none;color:var(--color-bg);width:100%;justify-content:flex-start;padding:16px">Let's Talk →</a>
+  </div>
+</div>
+
+
+<main id="main">
+<section style="padding:clamp(56px,6vw,96px) clamp(24px,5vw,72px) 0">
+  <div class="hc-wrap">
+    <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 20px">The business health check</span>
+    <h1 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(34px,4.6vw,64px);line-height:1.04;letter-spacing:-0.028em;margin:0">BUSINESS HEALTH CHECK FORM</h1>
+    <p style="font-size:17px;line-height:1.6;margin:20px 0 0;color:color-mix(in srgb,var(--color-text) 80%,transparent)"><em>Think of us as your business health checker.</em></p>
+    <p style="font-size:16px;line-height:1.65;margin:20px 0 0;color:color-mix(in srgb,var(--color-text) 80%,transparent)"><strong>Purpose:</strong> This assessment helps us understand the current health of your business, identify areas of risk, and highlight opportunities for improvement and growth.</p>
+    <p style="font-size:16px;line-height:1.65;margin:12px 0 0;color:color-mix(in srgb,var(--color-text) 80%,transparent)"><strong>Instructions:</strong> Please choose <strong>one answer</strong> for each question. Your score and result will be shown as soon as you submit.</p>
+
+    <form id="hc-form" novalidate style="margin-top:8px">
+      <div class="hc-section" data-area="info">
+        <h2>1. BUSINESS INFORMATION</h2>
+        <div class="hc-grid" style="margin-top:20px">
+          <div class="hc-field"><label for="biz_name">Business name *</label><input class="input" id="biz_name" name="biz_name" type="text" required style="min-height:44px"></div>
+          <div class="hc-field"><label for="industry">Industry / sector</label><input class="input" id="industry" name="industry" type="text" style="min-height:44px"></div>
+        </div>
+        <div class="hc-field"><span class="hc-legend">Years in business</span><div class="hc-opts"><div class="hc-opt"><input type="radio" id="years-lt1" name="years" value="lt1"><label for="years-lt1">Less than 1 year</label></div><div class="hc-opt"><input type="radio" id="years-1-3" name="years" value="1-3"><label for="years-1-3">1–3 years</label></div><div class="hc-opt"><input type="radio" id="years-4-7" name="years" value="4-7"><label for="years-4-7">4–7 years</label></div><div class="hc-opt"><input type="radio" id="years-8+" name="years" value="8+"><label for="years-8+">8+ years</label></div></div></div>
+        <div class="hc-field"><span class="hc-legend">Number of employees</span><div class="hc-opts"><div class="hc-opt"><input type="radio" id="employees-1-5" name="employees" value="1-5"><label for="employees-1-5">1–5</label></div><div class="hc-opt"><input type="radio" id="employees-6-10" name="employees" value="6-10"><label for="employees-6-10">6–10</label></div><div class="hc-opt"><input type="radio" id="employees-11-25" name="employees" value="11-25"><label for="employees-11-25">11–25</label></div><div class="hc-opt"><input type="radio" id="employees-26+" name="employees" value="26+"><label for="employees-26+">26+</label></div></div></div>
+        <div class="hc-field"><span class="hc-legend">Current business stage</span><div class="hc-opts"><div class="hc-opt"><input type="radio" id="stage-startup" name="stage" value="startup"><label for="stage-startup">Start-up</label></div><div class="hc-opt"><input type="radio" id="stage-growing" name="stage" value="growing"><label for="stage-growing">Growing</label></div><div class="hc-opt"><input type="radio" id="stage-established" name="stage" value="established"><label for="stage-established">Established</label></div><div class="hc-opt"><input type="radio" id="stage-expansion" name="stage" value="expansion"><label for="stage-expansion">Expansion</label></div></div></div>
+      </div>
+      
+    <div class="hc-section" data-area="fin">
+      <h2>2. FINANCIAL HEALTH</h2>
+      <p class="hc-note">Maximum 24 points</p>
+      <div class="hc-q" data-q="q1"><div class="hc-q-text">Do you keep proper and up-to-date financial records?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q1-3" name="q1" value="3"><label for="q1-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q1-2" name="q1" value="2"><label for="q1-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q1-1" name="q1" value="1"><label for="q1-1">No</label></div></div></div><div class="hc-q" data-q="q2"><div class="hc-q-text">Do you know your actual monthly profit?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q2-3" name="q2" value="3"><label for="q2-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q2-2" name="q2" value="2"><label for="q2-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q2-1" name="q2" value="1"><label for="q2-1">No</label></div></div></div><div class="hc-q" data-q="q3"><div class="hc-q-text">Do you separate personal and business finances?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q3-3" name="q3" value="3"><label for="q3-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q3-2" name="q3" value="2"><label for="q3-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q3-1" name="q3" value="1"><label for="q3-1">No</label></div></div></div><div class="hc-q" data-q="q4"><div class="hc-q-text">Do you monitor your cash flow regularly?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q4-3" name="q4" value="3"><label for="q4-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q4-2" name="q4" value="2"><label for="q4-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q4-1" name="q4" value="1"><label for="q4-1">No</label></div></div></div><div class="hc-q" data-q="q5"><div class="hc-q-text">Do you prepare regular financial reports?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q5-3" name="q5" value="3"><label for="q5-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q5-2" name="q5" value="2"><label for="q5-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q5-1" name="q5" value="1"><label for="q5-1">No</label></div></div></div><div class="hc-q" data-q="q6"><div class="hc-q-text">Do you know which products/services are most profitable?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q6-3" name="q6" value="3"><label for="q6-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q6-2" name="q6" value="2"><label for="q6-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q6-1" name="q6" value="1"><label for="q6-1">No</label></div></div></div><div class="hc-q" data-q="q7"><div class="hc-q-text">Do you regularly review your business expenses?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q7-3" name="q7" value="3"><label for="q7-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q7-2" name="q7" value="2"><label for="q7-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q7-1" name="q7" value="1"><label for="q7-1">No</label></div></div></div><div class="hc-q" data-q="q8"><div class="hc-q-text">Do you have a cash-flow forecast or financial budget?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q8-3" name="q8" value="3"><label for="q8-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q8-2" name="q8" value="2"><label for="q8-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q8-1" name="q8" value="1"><label for="q8-1">No</label></div></div></div>
+    </div>
+    <div class="hc-section" data-area="tax">
+      <h2>3. TAX &amp; COMPLIANCE</h2>
+      <p class="hc-note">Maximum 18 points</p>
+      <div class="hc-q" data-q="q9"><div class="hc-q-text">Is your business properly registered?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q9-3" name="q9" value="3"><label for="q9-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q9-2" name="q9" value="2"><label for="q9-2">Sometimes / Partly</label></div><div class="hc-opt"><input type="radio" id="q9-1" name="q9" value="1"><label for="q9-1">No</label></div></div></div><div class="hc-q" data-q="q10"><div class="hc-q-text">Are your tax filings up to date?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q10-3" name="q10" value="3"><label for="q10-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q10-2" name="q10" value="2"><label for="q10-2">Sometimes / Partly</label></div><div class="hc-opt"><input type="radio" id="q10-1" name="q10" value="1"><label for="q10-1">No</label></div></div></div><div class="hc-q" data-q="q11"><div class="hc-q-text">Are your statutory obligations properly managed?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q11-3" name="q11" value="3"><label for="q11-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q11-2" name="q11" value="2"><label for="q11-2">Sometimes / Partly</label></div><div class="hc-opt"><input type="radio" id="q11-1" name="q11" value="1"><label for="q11-1">No</label></div></div></div><div class="hc-q" data-q="q12"><div class="hc-q-text">Do you maintain proper documentation for tax purposes?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q12-3" name="q12" value="3"><label for="q12-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q12-2" name="q12" value="2"><label for="q12-2">Sometimes / Partly</label></div><div class="hc-opt"><input type="radio" id="q12-1" name="q12" value="1"><label for="q12-1">No</label></div></div></div><div class="hc-q" data-q="q13"><div class="hc-q-text">Do you have a system for monitoring compliance deadlines?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q13-3" name="q13" value="3"><label for="q13-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q13-2" name="q13" value="2"><label for="q13-2">Sometimes / Partly</label></div><div class="hc-opt"><input type="radio" id="q13-1" name="q13" value="1"><label for="q13-1">No</label></div></div></div><div class="hc-q" data-q="q14"><div class="hc-q-text">Do you have professional support for tax/compliance matters?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q14-3" name="q14" value="3"><label for="q14-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q14-2" name="q14" value="2"><label for="q14-2">Sometimes / Partly</label></div><div class="hc-opt"><input type="radio" id="q14-1" name="q14" value="1"><label for="q14-1">No</label></div></div></div>
+    </div>
+    <div class="hc-section" data-area="str">
+      <h2>4. BUSINESS STRATEGY</h2>
+      <p class="hc-note">Maximum 18 points</p>
+      <div class="hc-q" data-q="q15"><div class="hc-q-text">Does your business have clear goals?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q15-3" name="q15" value="3"><label for="q15-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q15-2" name="q15" value="2"><label for="q15-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q15-1" name="q15" value="1"><label for="q15-1">No</label></div></div></div><div class="hc-q" data-q="q16"><div class="hc-q-text">Do you have a written business/growth plan?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q16-3" name="q16" value="3"><label for="q16-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q16-2" name="q16" value="2"><label for="q16-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q16-1" name="q16" value="1"><label for="q16-1">No</label></div></div></div><div class="hc-q" data-q="q17"><div class="hc-q-text">Do you have measurable KPIs?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q17-3" name="q17" value="3"><label for="q17-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q17-2" name="q17" value="2"><label for="q17-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q17-1" name="q17" value="1"><label for="q17-1">No</label></div></div></div><div class="hc-q" data-q="q18"><div class="hc-q-text">Do you regularly review business performance?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q18-3" name="q18" value="3"><label for="q18-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q18-2" name="q18" value="2"><label for="q18-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q18-1" name="q18" value="1"><label for="q18-1">No</label></div></div></div><div class="hc-q" data-q="q19"><div class="hc-q-text">Do you know what is currently limiting your growth?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q19-3" name="q19" value="3"><label for="q19-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q19-2" name="q19" value="2"><label for="q19-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q19-1" name="q19" value="1"><label for="q19-1">No</label></div></div></div><div class="hc-q" data-q="q20"><div class="hc-q-text">Do you have a clear plan for the next 12 months?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q20-3" name="q20" value="3"><label for="q20-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q20-2" name="q20" value="2"><label for="q20-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q20-1" name="q20" value="1"><label for="q20-1">No</label></div></div></div>
+    </div>
+    <div class="hc-section" data-area="sal">
+      <h2>5. SALES &amp; CUSTOMERS</h2>
+      <p class="hc-note">Maximum 18 points</p>
+      <div class="hc-q" data-q="q21"><div class="hc-q-text">Do you consistently track your sales?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q21-3" name="q21" value="3"><label for="q21-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q21-2" name="q21" value="2"><label for="q21-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q21-1" name="q21" value="1"><label for="q21-1">No</label></div></div></div><div class="hc-q" data-q="q22"><div class="hc-q-text">Do you know your most profitable products/services?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q22-3" name="q22" value="3"><label for="q22-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q22-2" name="q22" value="2"><label for="q22-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q22-1" name="q22" value="1"><label for="q22-1">No</label></div></div></div><div class="hc-q" data-q="q23"><div class="hc-q-text">Do you track customer retention/repeat purchases?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q23-3" name="q23" value="3"><label for="q23-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q23-2" name="q23" value="2"><label for="q23-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q23-1" name="q23" value="1"><label for="q23-1">No</label></div></div></div><div class="hc-q" data-q="q24"><div class="hc-q-text">Do you have a clear customer acquisition strategy?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q24-3" name="q24" value="3"><label for="q24-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q24-2" name="q24" value="2"><label for="q24-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q24-1" name="q24" value="1"><label for="q24-1">No</label></div></div></div><div class="hc-q" data-q="q25"><div class="hc-q-text">Do you regularly collect customer feedback?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q25-3" name="q25" value="3"><label for="q25-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q25-2" name="q25" value="2"><label for="q25-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q25-1" name="q25" value="1"><label for="q25-1">No</label></div></div></div><div class="hc-q" data-q="q26"><div class="hc-q-text">Do you know why customers choose or leave your business?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q26-3" name="q26" value="3"><label for="q26-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q26-2" name="q26" value="2"><label for="q26-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q26-1" name="q26" value="1"><label for="q26-1">No</label></div></div></div>
+    </div>
+    <div class="hc-section" data-area="ops">
+      <h2>6. PEOPLE &amp; OPERATIONS</h2>
+      <p class="hc-note">Maximum 21 points</p>
+      <div class="hc-q" data-q="q27"><div class="hc-q-text">Are employees&#x27; roles clearly defined?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q27-3" name="q27" value="3"><label for="q27-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q27-2" name="q27" value="2"><label for="q27-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q27-1" name="q27" value="1"><label for="q27-1">No</label></div></div></div><div class="hc-q" data-q="q28"><div class="hc-q-text">Do employees have measurable performance targets?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q28-3" name="q28" value="3"><label for="q28-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q28-2" name="q28" value="2"><label for="q28-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q28-1" name="q28" value="1"><label for="q28-1">No</label></div></div></div><div class="hc-q" data-q="q29"><div class="hc-q-text">Do you regularly review employee performance?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q29-3" name="q29" value="3"><label for="q29-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q29-2" name="q29" value="2"><label for="q29-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q29-1" name="q29" value="1"><label for="q29-1">No</label></div></div></div><div class="hc-q" data-q="q30"><div class="hc-q-text">Are your major business processes documented?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q30-3" name="q30" value="3"><label for="q30-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q30-2" name="q30" value="2"><label for="q30-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q30-1" name="q30" value="1"><label for="q30-1">No</label></div></div></div><div class="hc-q" data-q="q31"><div class="hc-q-text">Can your business operate effectively without you?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q31-3" name="q31" value="3"><label for="q31-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q31-2" name="q31" value="2"><label for="q31-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q31-1" name="q31" value="1"><label for="q31-1">No</label></div></div></div><div class="hc-q" data-q="q32"><div class="hc-q-text">Do you have adequate HR policies and procedures?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q32-3" name="q32" value="3"><label for="q32-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q32-2" name="q32" value="2"><label for="q32-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q32-1" name="q32" value="1"><label for="q32-1">No</label></div></div></div><div class="hc-q" data-q="q33"><div class="hc-q-text">Do you have the right skills and people to support growth?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q33-3" name="q33" value="3"><label for="q33-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q33-2" name="q33" value="2"><label for="q33-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q33-1" name="q33" value="1"><label for="q33-1">No</label></div></div></div>
+    </div>
+    <div class="hc-section" data-area="risk">
+      <h2>7. RISK &amp; INTERNAL CONTROLS</h2>
+      <p class="hc-note">Maximum 18 points</p>
+      <div class="hc-q" data-q="q34"><div class="hc-q-text">Are your bank accounts regularly reconciled?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q34-3" name="q34" value="3"><label for="q34-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q34-2" name="q34" value="2"><label for="q34-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q34-1" name="q34" value="1"><label for="q34-1">No</label></div></div></div><div class="hc-q" data-q="q35"><div class="hc-q-text">Do you have controls over business spending?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q35-3" name="q35" value="3"><label for="q35-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q35-2" name="q35" value="2"><label for="q35-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q35-1" name="q35" value="1"><label for="q35-1">No</label></div></div></div><div class="hc-q" data-q="q36"><div class="hc-q-text">Are financial responsibilities properly separated?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q36-3" name="q36" value="3"><label for="q36-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q36-2" name="q36" value="2"><label for="q36-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q36-1" name="q36" value="1"><label for="q36-1">No</label></div></div></div><div class="hc-q" data-q="q37"><div class="hc-q-text">Do you maintain adequate transaction records?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q37-3" name="q37" value="3"><label for="q37-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q37-2" name="q37" value="2"><label for="q37-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q37-1" name="q37" value="1"><label for="q37-1">No</label></div></div></div><div class="hc-q" data-q="q38"><div class="hc-q-text">Do you monitor business risks regularly?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q38-3" name="q38" value="3"><label for="q38-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q38-2" name="q38" value="2"><label for="q38-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q38-1" name="q38" value="1"><label for="q38-1">No</label></div></div></div><div class="hc-q" data-q="q39"><div class="hc-q-text">Do you have a business continuity plan?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q39-3" name="q39" value="3"><label for="q39-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q39-2" name="q39" value="2"><label for="q39-2">Sometimes</label></div><div class="hc-opt"><input type="radio" id="q39-1" name="q39" value="1"><label for="q39-1">No</label></div></div></div>
+    </div>
+    <div class="hc-section" data-area="tech">
+      <h2>8. TECHNOLOGY &amp; SYSTEMS</h2>
+      <p class="hc-note">Maximum 15 points</p>
+      <div class="hc-q" data-q="q40"><div class="hc-q-text">Do you use accounting/business management software?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q40-3" name="q40" value="3"><label for="q40-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q40-2" name="q40" value="2"><label for="q40-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q40-1" name="q40" value="1"><label for="q40-1">No</label></div></div></div><div class="hc-q" data-q="q41"><div class="hc-q-text">Are important business processes automated?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q41-3" name="q41" value="3"><label for="q41-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q41-2" name="q41" value="2"><label for="q41-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q41-1" name="q41" value="1"><label for="q41-1">No</label></div></div></div><div class="hc-q" data-q="q42"><div class="hc-q-text">Are your business records securely stored?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q42-3" name="q42" value="3"><label for="q42-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q42-2" name="q42" value="2"><label for="q42-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q42-1" name="q42" value="1"><label for="q42-1">No</label></div></div></div><div class="hc-q" data-q="q43"><div class="hc-q-text">Do your systems provide reliable information for decision-making?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q43-3" name="q43" value="3"><label for="q43-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q43-2" name="q43" value="2"><label for="q43-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q43-1" name="q43" value="1"><label for="q43-1">No</label></div></div></div><div class="hc-q" data-q="q44"><div class="hc-q-text">Do you regularly review opportunities for technology improvement?</div><div class="hc-opts"><div class="hc-opt"><input type="radio" id="q44-3" name="q44" value="3"><label for="q44-3">Yes</label></div><div class="hc-opt"><input type="radio" id="q44-2" name="q44" value="2"><label for="q44-2">Partly</label></div><div class="hc-opt"><input type="radio" id="q44-1" name="q44" value="1"><label for="q44-1">No</label></div></div></div>
+    </div>
+      <div class="hc-section" data-area="owner">
+        <h2>9. BUSINESS OWNER'S ASSESSMENT</h2>
+        <p class="hc-note">Not scored. Helps us understand your priorities.</p>
+        <div class="hc-field"><span class="hc-legend">What is currently your biggest business challenge?</span>
+          <div class="hc-opts"><div class="hc-opt"><input type="radio" id="challenge-fin" name="challenge" value="fin"><label for="challenge-fin">Finance / Cash Flow</label></div><div class="hc-opt"><input type="radio" id="challenge-tax" name="challenge" value="tax"><label for="challenge-tax">Tax / Compliance</label></div><div class="hc-opt"><input type="radio" id="challenge-sales" name="challenge" value="sales"><label for="challenge-sales">Sales / Marketing</label></div><div class="hc-opt"><input type="radio" id="challenge-ops" name="challenge" value="ops"><label for="challenge-ops">Operations</label></div><div class="hc-opt"><input type="radio" id="challenge-people" name="challenge" value="people"><label for="challenge-people">Employees</label></div><div class="hc-opt"><input type="radio" id="challenge-strategy" name="challenge" value="strategy"><label for="challenge-strategy">Business Strategy</label></div><div class="hc-opt"><input type="radio" id="challenge-tech" name="challenge" value="tech"><label for="challenge-tech">Systems / Technology</label></div><div class="hc-opt"><input type="radio" id="challenge-other" name="challenge" value="other"><label for="challenge-other">Other</label></div></div>
+          <input class="input" id="challenge_other" name="challenge_other" type="text" placeholder="If other, please specify" style="min-height:44px;margin-top:8px">
+        </div>
+        <div class="hc-field"><label for="improve">What is the ONE thing you would like to improve most in your business?</label><textarea class="input" id="improve" name="improve" rows="3" style="min-height:90px"></textarea></div>
+        <div class="hc-field"><label for="concern">What is your biggest concern about the business over the next 12 months?</label><textarea class="input" id="concern" name="concern" rows="3" style="min-height:90px"></textarea></div>
+      </div>
+      <div class="hc-section" data-area="contact">
+        <h2>CONTACT DETAILS</h2>
+        <p class="hc-note">Optional. Lets us follow up on your result.</p>
+        <div class="hc-grid">
+          <div class="hc-field"><label for="contact_name">Name</label><input class="input" id="contact_name" name="contact_name" type="text" style="min-height:44px"></div>
+          <div class="hc-field"><label for="contact_phone">Phone</label><input class="input" id="contact_phone" name="contact_phone" type="tel" style="min-height:44px"></div>
+          <div class="hc-field"><label for="contact_email">Email</label><input class="input" id="contact_email" name="contact_email" type="email" style="min-height:44px"></div>
+        </div>
+      </div>
+      <p class="hc-err" id="hc-err" role="alert"></p>
+      <div style="padding:24px 0 80px"><button type="submit" class="btn btn-primary" style="padding:14px 22px;font-size:15px">Submit and see my result →</button></div>
+    </form>
+
+    <div id="hc-result" hidden style="padding:48px 0 96px;border-top:2px solid var(--color-divider)">
+      <span style="display:block;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-700);margin:0 0 16px">Your business health result</span>
+      <p id="hc-biz" style="font-size:16px;margin:0 0 24px;color:color-mix(in srgb,var(--color-text) 75%,transparent)"></p>
+      <div style="font-family:var(--font-heading);font-weight:800;font-size:clamp(48px,7vw,88px);line-height:1;letter-spacing:-0.03em"><span id="hc-total">0</span><span style="font-size:0.4em;color:color-mix(in srgb,var(--color-text) 55%,transparent)"> / 132</span></div>
+      <div class="hc-result-band" style="margin-top:20px"><span class="hc-dot" id="hc-dot"></span><span id="hc-status"></span></div>
+      <p id="hc-meaning" style="font-size:16px;line-height:1.6;margin:12px 0 0;max-width:60ch"></p>
+      <div style="margin-top:40px;border-top:2px solid var(--color-divider)" id="hc-areas"></div>
+      <div style="margin-top:40px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="contact.html" style="text-decoration:none;color:var(--color-bg);padding:14px 22px;font-size:15px">Talk to us about your result →</a>
+        <button type="button" class="btn btn-secondary" id="hc-retake" style="padding:14px 22px;font-size:15px">Take the check again</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer style="border-top:2px solid var(--color-divider);padding:clamp(48px,5vw,80px) clamp(24px,5vw,72px) 32px">
+  <div style="max-width:1360px;margin:0 auto">
+    <div data-r="footer" style="display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2fr));gap:clamp(24px,4vw,64px)">
+      <div>
+        <span style="font-family:var(--font-heading);font-weight:800;font-size:19px;letter-spacing:-0.02em;display:flex;align-items:center;gap:12px;margin-bottom:16px"><img src="assets/img/brand-icon.png" alt="" style="width:26px;height:26px;display:block">XtraThinkTank Solutions Limited</span>
+        <p style="font-size:15.5px;line-height:1.6;margin:0;max-width:34ch;color:color-mix(in srgb, var(--color-text) 75%, transparent)">Practical business solutions for sustainable growth.</p>
+      </div>
+      <div>
+        <h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 16px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Explore</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <a href="services.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Services</a>
+          <a href="about.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">About</a>
+          <a href="leadership.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Leadership</a>
+          <a href="insights.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Insights</a>
+          <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 16px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Services</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <a href="audit.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Audit &amp; Assurance</a>
+          <a href="tax.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Tax &amp; Compliance</a>
+          <a href="advisory.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Business Advisory</a>
+          <a href="people.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">People &amp; Human Capital</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 16px;color:color-mix(in srgb, var(--color-text) 55%, transparent)">Connect</h3>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:15px">
+          <a href="tel:+2348145803637" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">+234 814 580 3637</a>
+          <a href="https://wa.me/2348145803637" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">WhatsApp</a>
+          <a href="mailto:xtrathinktanksolutionsltd@gmail.com" style="color:inherit;text-decoration:none;word-break:break-word" style-hover="color:var(--color-accent-700)">Email us</a>
+          <span style="color:color-mix(in srgb, var(--color-text) 50%, transparent)">Social — coming soon</span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:2px solid var(--color-divider);margin-top:48px;padding-top:24px;display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;font-size:13px;color:color-mix(in srgb, var(--color-text) 65%, transparent)">
+      <span>© 2026 XtraThinkTank Solutions Ltd. Registered with the Corporate Affairs Commission, Nigeria.</span>
+      <span style="display:flex;gap:24px;flex-wrap:wrap">
+        <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Privacy Policy</a>
+        <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Terms</a>
+        <a href="contact.html" style="color:inherit;text-decoration:none" style-hover="color:var(--color-accent-700)">Cookie Policy</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<a data-xtt-stickycta href="contact.html" class="btn btn-primary" style="display:none;position:fixed;left:16px;right:16px;bottom:16px;z-index:60;padding:16px;font-size:16px;justify-content:flex-start;text-decoration:none;box-shadow:var(--shadow-lg)">Talk to Us →</a>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var motion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var touch = matchMedia('(hover: none)').matches;
+  var narrow = function () { return window.innerWidth < 900; };
+
+  var reveal = document.querySelectorAll('[data-xtt-reveal]');
+  if (motion) {
+    var below = [];
+    reveal.forEach(function (el) {
+      el.style.transition = 'opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1)';
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      el.style.opacity = '0'; el.style.transform = 'translateY(18px)';
+      below.push(el);
+    });
+    var ioFired = false;
+    var io = new IntersectionObserver(function (entries) {
+      ioFired = true;
+      entries.forEach(function (e, i) {
+        if (!e.isIntersecting) return;
+        e.target.style.transitionDelay = Math.min(i * 60, 240) + 'ms';
+        e.target.style.opacity = '1'; e.target.style.transform = 'none';
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    below.forEach(function (el) { io.observe(el); });
+    setTimeout(function () {
+      if (ioFired) return;
+      below.forEach(function (el) { el.style.opacity = '1'; el.style.transform = 'none'; });
+    }, 700);
+  }
+
+  var heroSlides = Array.from(document.querySelectorAll('[data-hero-slide]'));
+  var heroDots = Array.from(document.querySelectorAll('[data-hero-dot]'));
+  if (heroSlides.length > 1) {
+    var activeHero = 0;
+    var heroTimer = null;
+    var showHero = function (i) {
+      heroSlides.forEach(function (s, idx) {
+        var on = idx === i;
+        s.style.opacity = on ? '1' : '0';
+        s.style.pointerEvents = on ? 'auto' : 'none';
+        if (on) { s.removeAttribute('inert'); } else { s.setAttribute('inert', ''); }
+      });
+      heroDots.forEach(function (d, idx) { d.setAttribute('aria-current', idx === i ? 'true' : 'false'); });
+      activeHero = i;
+    };
+    var stopHero = function () { if (heroTimer) { clearInterval(heroTimer); heroTimer = null; } };
+    var startHero = function () {
+      stopHero();
+      if (!motion) return;
+      heroTimer = setInterval(function () { showHero((activeHero + 1) % heroSlides.length); }, 7000);
+    };
+    heroDots.forEach(function (d, idx) {
+      d.addEventListener('click', function () { showHero(idx); startHero(); });
+    });
+    var heroSection = document.querySelector('[data-xtt-hero]');
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', stopHero);
+      heroSection.addEventListener('mouseleave', startHero);
+      heroSection.addEventListener('focusin', stopHero);
+      heroSection.addEventListener('focusout', function () { if (!heroSection.contains(document.activeElement)) startHero(); });
+    }
+    showHero(0);
+    startHero();
+  }
+
+  var dash = document.querySelector('[data-xtt-dash]');
+  if (dash) {
+    var draw = function () {
+      dash.querySelectorAll('[data-xtt-bar]').forEach(function (bar, i) {
+        setTimeout(function () { bar.style.width = '100%'; }, motion ? i * 130 : 0);
+      });
+    };
+    var dio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { draw(); dio.disconnect(); } });
+    }, { threshold: 0.25 });
+    dio.observe(dash);
+  }
+
+  var _always = false;
+  var openRow = function (row, on) {
+    var p = row.querySelector('[data-xtt-panel]');
+    if (!p) return;
+    p.style.maxHeight = on ? p.scrollHeight + 40 + 'px' : '0px';
+    p.style.opacity = on ? '1' : '0';
+  };
+  var rows = Array.from(document.querySelectorAll('[data-xtt-service]'));
+  var sync = function () {
+    var always = touch || narrow();
+    rows.forEach(function (r) { openRow(r, always); });
+    _always = always;
+  };
+  rows.forEach(function (r) {
+    r.addEventListener('mouseenter', function () { if (!_always) openRow(r, true); });
+    r.addEventListener('mouseleave', function () { if (!_always) openRow(r, false); });
+    r.addEventListener('focusin', function () { openRow(r, true); });
+    r.setAttribute('tabindex', '0');
+  });
+  sync();
+
+  var cta = document.querySelector('[data-xtt-stickycta]');
+  var navlinks = document.querySelector('[data-xtt-navlinks]');
+  var navcta = document.querySelector('[data-xtt-navcta]');
+  var menuBtn = document.querySelector('[data-xtt-menubtn]');
+  var menu = document.querySelector('[data-xtt-menu]');
+  var setMenu = function (open) {
+    if (!menu || !menuBtn) return;
+    menu.style.display = open ? 'block' : 'none';
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.textContent = open ? 'Close' : 'Menu';
+  };
+  if (menuBtn) menuBtn.addEventListener('click', function () { setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'); });
+  if (menu) menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+  var applyResponsive = function () {
+    var n = narrow();
+    if (cta) cta.style.display = n ? 'inline-flex' : 'none';
+    if (navlinks) navlinks.style.display = n ? 'none' : 'flex';
+    if (navcta) navcta.style.display = n ? 'none' : 'inline-flex';
+    if (menuBtn) menuBtn.style.display = n ? 'inline-flex' : 'none';
+    if (!n) setMenu(false);
+    sync();
+  };
+  applyResponsive();
+  window.addEventListener('resize', applyResponsive);
+
+  var form = document.querySelector('[data-xtt-form]');
+  if (form) form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var note = form.querySelector('[data-xtt-formnote]');
+    if (note) note.style.display = 'block';
+  });
+});
+</script>
+
+<script>
+(function () {
+  var SUBMIT_URL = '';
+  var BANDS = [
+    { min: 110, label: 'Strong', color: '#1e7a3c', meaning: 'Good systems and controls are generally in place.' },
+    { min: 88,  label: 'Stable', color: '#c79100', meaning: 'Business is functioning but some areas require attention.' },
+    { min: 66,  label: 'Needs Improvement', color: '#d9731a', meaning: 'Several weaknesses may be affecting performance or growth.' },
+    { min: 0,   label: 'Critical Attention', color: '#b3261e', meaning: 'Significant gaps require structured intervention.' }
+  ];
+  var AREA_NAMES = {};
+  var AREA_LABELS = {'fin': 'Financial Health', 'tax': 'Tax & Compliance', 'str': 'Business Strategy', 'sal': 'Sales & Customers', 'ops': 'People & Operations', 'risk': 'Risk & Internal Controls', 'tech': 'Technology & Systems'};
+  var form = document.getElementById('hc-form');
+  var err = document.getElementById('hc-err');
+  var result = document.getElementById('hc-result');
+
+  document.querySelectorAll('[data-area]').forEach(function (s) {
+    var h = s.querySelector('h2');
+    if (h && s.dataset.area !== 'info' && s.dataset.area !== 'owner' && s.dataset.area !== 'contact') {
+      AREA_NAMES[s.dataset.area] = s;
+    }
+  });
+
+  function value(name) {
+    var el = form.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  }
+
+  function clearMissing() {
+    form.querySelectorAll('.hc-missing').forEach(function (q) { q.classList.remove('hc-missing'); });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearMissing();
+    err.style.display = 'none';
+    var missing = [];
+    form.querySelectorAll('[data-q]').forEach(function (q) {
+      if (!value(q.dataset.q)) { missing.push(q); }
+    });
+    var bizName = document.getElementById('biz_name');
+    if (!bizName.value.trim()) { missing.push(bizName); }
+    if (missing.length) {
+      var unanswered = missing.filter(function (m) { return m.hasAttribute('data-q'); });
+      unanswered.forEach(function (q) { q.classList.add('hc-missing'); });
+      var first = missing[0];
+      err.textContent = 'Please answer every question' + (unanswered.length ? ' (' + unanswered.length + ' unanswered)' : '') + ' and enter your business name before submitting.';
+      err.style.display = 'block';
+      first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    var areas = [];
+    var total = 0;
+    Object.keys(AREA_NAMES).forEach(function (id) {
+      var s = AREA_NAMES[id];
+      var sum = 0, count = 0;
+      s.querySelectorAll('[data-q]').forEach(function (q) { sum += parseInt(value(q.dataset.q), 10); count++; });
+      var max = count * 3;
+      areas.push({ id: id, name: AREA_LABELS[id], score: sum, max: max });
+      total += sum;
+    });
+
+    var band = BANDS.find(function (b) { return total >= b.min; });
+    var biz = document.getElementById('biz_name').value.trim();
+
+    document.getElementById('hc-biz').textContent = biz ? 'Result for ' + biz + '.' : '';
+    document.getElementById('hc-total').textContent = total;
+    document.getElementById('hc-status').textContent = band.label;
+    document.getElementById('hc-status').style.color = band.color;
+    document.getElementById('hc-dot').style.background = band.color;
+    document.getElementById('hc-meaning').textContent = band.meaning;
+
+    var wrap = document.getElementById('hc-areas');
+    wrap.innerHTML = '';
+    areas.forEach(function (a) {
+      var row = document.createElement('div');
+      row.className = 'hc-area';
+      var pct = Math.round((a.score / a.max) * 100);
+      row.innerHTML = '<div style="display:flex;justify-content:space-between;gap:16px;font-size:16px"><span style="font-family:var(--font-heading);font-weight:800"></span><span></span></div>' +
+        '<div class="hc-bar"><span></span></div>';
+      row.querySelector('span').textContent = a.name;
+      row.querySelectorAll('div > span')[1].textContent = a.score + ' / ' + a.max;
+      row.querySelector('.hc-bar > span').style.width = pct + '%';
+      wrap.appendChild(row);
+    });
+
+    var payload = {
+      business: {
+        name: biz,
+        industry: document.getElementById('industry').value.trim(),
+        years: value('years'),
+        employees: value('employees'),
+        stage: value('stage')
+      },
+      contact: {
+        name: document.getElementById('contact_name').value.trim(),
+        phone: document.getElementById('contact_phone').value.trim(),
+        email: document.getElementById('contact_email').value.trim()
+      },
+      owner: {
+        challenge: value('challenge'),
+        challenge_other: document.getElementById('challenge_other').value.trim(),
+        improve: document.getElementById('improve').value.trim(),
+        concern: document.getElementById('concern').value.trim()
+      },
+      scores: { total: total, max: 132, status: band.label, areas: areas },
+      submitted_at: new Date().toISOString()
+    };
+    if (SUBMIT_URL) {
+      fetch(SUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function () {});
+    }
+
+    form.hidden = true;
+    result.hidden = false;
+    window.scrollTo({ top: result.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+  });
+
+  document.getElementById('hc-retake').addEventListener('click', function () {
+    form.reset();
+    clearMissing();
+    result.hidden = true;
+    form.hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
