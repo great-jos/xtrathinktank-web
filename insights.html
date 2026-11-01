@@ -35,6 +35,7 @@
 <nav class="nav" style="position:sticky;top:0;z-index:50;background:var(--color-bg);padding-left:clamp(24px,5vw,72px);padding-right:clamp(24px,5vw,72px);gap:32px">
   <a class="nav-brand" href="index.html" style="margin-right:auto;display:flex;align-items:center;text-decoration:none"><img src="assets/img/brand-logo.png" alt="XtraThinkTank Solutions Limited" style="height:30px;width:auto;display:block"></a>
   <div style="display:flex;align-items:center;gap:28px" data-xtt-navlinks>
+    <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="services.html">Services</a>
     <a href="insights.html" style="color:var(--color-accent-700);text-decoration:underline;text-underline-offset:6px">Insights</a>
@@ -45,6 +46,7 @@
   <button type="button" data-xtt-menubtn class="btn btn-secondary" aria-expanded="false" aria-controls="ip-menu" style="padding:10px 16px;font-size:14px">Menu</button>
 </nav>
 <div id="ip-menu" data-xtt-menu style="display:none;position:sticky;top:0;z-index:49;background:var(--color-bg);border-bottom:2px solid var(--color-divider)">
+  <a href="index.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Home</a>
   <a href="about.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">About</a>
   <a href="services.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Services</a>
   <a href="insights.html" style="display:block;padding:18px clamp(24px,5vw,72px);font-family:var(--font-heading);font-weight:800;font-size:19px;color:inherit;text-decoration:none;border-top:2px solid var(--color-divider)" style-hover="color:var(--color-accent)">Insights</a>
@@ -63,13 +65,26 @@
   </section>
 
   <section style="padding:0 clamp(24px,5vw,72px) clamp(56px,6vw,96px)">
-    <div data-r="split" style="max-width:1360px;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);border-top:2px solid var(--color-divider);padding-top:40px;align-items:center">
-      <figure style="margin:0"><image-slot id="xtt-ip-guide" shape="rect" fit="contain" src="assets/img/sme-guide-cutout.png" placeholder="The Complete SME Guide" style="width:100%;aspect-ratio:2/3"></image-slot></figure>
-      <div>
-        <span class="tag tag-outline" style="margin-bottom:20px">Publication</span>
-        <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(28px,3.6vw,50px);line-height:1.06;letter-spacing:-0.024em;margin:0;margin-left:-0.05em;margin-top:16px">The Complete SME Guide</h2>
-        <p style="font-size:16.5px;line-height:1.65;margin:0;color:color-mix(in srgb, var(--color-text) 80%, transparent);margin-top:20px">Written by Oke Oladimeji as a practical reference for entrepreneurs and business owners building stronger, more sustainable businesses.</p>
-        <a class="btn btn-ghost" href="contact.html" style="text-decoration:none;padding-left:0;margin-top:24px">Enquire about the guide →</a>
+    <div style="max-width:1360px;margin:0 auto;border-top:2px solid var(--color-divider);padding-top:40px">
+      <div data-r="2col" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,5vw,64px)">
+        <div data-r="split" style="display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,32px);align-items:center">
+          <figure style="margin:0"><image-slot id="xtt-ip-guide" shape="rect" fit="contain" src="assets/img/sme-guide-cutout.png" placeholder="The Complete SME Guide" style="width:100%;aspect-ratio:2/3"></image-slot></figure>
+          <div>
+            <span class="tag tag-outline" style="margin-bottom:20px">Publication · Vol. 1</span>
+            <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,2.6vw,36px);line-height:1.1;letter-spacing:-0.02em;margin:16px 0 0">The Complete SME Guide</h2>
+            <p style="font-size:15.5px;line-height:1.6;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">Written by Oke Oladimeji as a practical reference for entrepreneurs and business owners building stronger, more sustainable businesses.</p>
+            <a class="btn btn-ghost" href="contact.html" style="text-decoration:none;padding-left:0;margin-top:20px">Enquire about the guide →</a>
+          </div>
+        </div>
+        <div data-r="split" style="display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,32px);align-items:center">
+          <figure style="margin:0"><image-slot id="xtt-ip-guide-2" shape="rect" fit="contain" src="assets/img/sme-guide-2-cutout.png" placeholder="The Complete SME Guide Vol. 2" style="width:100%;aspect-ratio:2/3"></image-slot></figure>
+          <div>
+            <span class="tag tag-outline" style="margin-bottom:20px">Publication · Vol. 2</span>
+            <h2 style="font-family:var(--font-heading);font-weight:800;font-size:clamp(24px,2.6vw,36px);line-height:1.1;letter-spacing:-0.02em;margin:16px 0 0">The Complete SME Guide Vol. 2</h2>
+            <p style="font-size:15.5px;line-height:1.6;margin:16px 0 0;color:color-mix(in srgb, var(--color-text) 80%, transparent)">The follow-up from Oke Oladimeji, including the Tax Reform Act and 92 questions to answer before starting a business.</p>
+            <a class="btn btn-ghost" href="contact.html" style="text-decoration:none;padding-left:0;margin-top:20px">Enquire about the guide →</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
